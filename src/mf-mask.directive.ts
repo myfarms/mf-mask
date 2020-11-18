@@ -62,6 +62,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     public writeValue(inputValue: string): void {
         if (!inputValue) {
             inputValue = '';
+            return;
         }
         this.inputValue = inputValue;
         this.applyMask();
@@ -88,6 +89,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 inputValue += inputArray[i];
             }
         }
+
         inputArray = inputValue.split('');
         let maskCursor = 0;
         let newValue = '';
@@ -114,6 +116,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 i--;
             }
         }
+
         for (let i = newValue.length - 1; i >= 0; i--) {
             const val = newValue.charAt(i);
             const maskPattern = this.mfMask[i];
@@ -124,6 +127,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 newValue = newValue.slice(0, newValue.length - 1);
             }
         }
+
         setTimeout(() => this.onChange(newValue));
         this.elementRef.nativeElement.value = newValue;
     }
