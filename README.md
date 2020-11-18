@@ -10,7 +10,7 @@ Playground: <https://stackblitz.com/edit/mf-mask>
 $ npm install @myfarms/mf-mask --save
 ```
 
-### Step 2: Import the MfSelectModule
+### Step 2: Import the MfMaskModule
 
 ```typescript
 import { NgModule } from '@angular/core';
