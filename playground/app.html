@@ -1,0 +1,11 @@
+<h1>MFMask Showcase</h1>
+<h3>This is Proof of Concept. Everything is subject to change.</h3>
+<br/>
+
+<div style='margin: 100px; width: 500px'>
+  <input type='text' mfMask='PHONE' [(ngModel)]='ngModel' [disabled]='disabled' />
+</div>
+
+Model: {{ ngModel | json }}
+<button (click)='disabled = !disabled'>Toggle Disable</button>
+

@@ -1,0 +1,28 @@
+{
+  "name": "@myfarms/mf-mask",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myfarms/mf-mask"
+  },
+  "author": {
+    "name": "Adam Keenan",
+    "email": "adam.keenan@myfarms.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/myfarms/mf-mask/issues"
+  },
+  "main": "mf-mask.umd.js",
+  "module": "mf-mask.js",
+  "jsnext:main": "mf-mask.js",
+  "typings": "mf-mask.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^9.0.0",
+    "rxjs": "^6.0.0",
+    "zone.js": "^0.8.4"
+  }
+}

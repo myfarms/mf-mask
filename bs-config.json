@@ -1,0 +1,14 @@
+{
+  "open": false,
+  "files": ["./dist/**/*.{html,htm,css,js,scss,ts}"],
+  "watchEvents": ["change", "add"],
+  "server": {
+    "baseDir": "src",
+    "routes": {
+      "/": "playground",
+      "/node_modules/": "node_modules",
+      "/dist/": "dist",
+      "/.playground": ".playground"
+    }
+  }
+}
