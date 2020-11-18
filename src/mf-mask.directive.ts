@@ -124,7 +124,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 newValue = newValue.slice(0, newValue.length - 1);
             }
         }
-        this.onChange(newValue);
+        setTimeout(() => this.onChange(newValue));
         this.elementRef.nativeElement.value = newValue;
     }
 }
