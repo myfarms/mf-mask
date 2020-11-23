@@ -59,10 +59,12 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
         el.setSelectionRange(idx, idx);
     }
 
-    public writeValue(inputValue: string): void {
-        if (!inputValue) {
-            inputValue = '';
-            return;
+    public writeValue(inputValue: any): void {
+        if (typeof inputValue !== 'string') {
+            inputValue = inputValue?.toString?.();
+            if (!inputValue) {
+                inputValue = '';
+            }
         }
         this.inputValue = inputValue;
         this.applyMask();
@@ -81,6 +83,9 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     }
 
     private applyMask() {
+        if (this.inputValue.length === 0) {
+            return;
+        }
         const patterns = Object.values(this.config.patterns);
         let inputValue = '';
         let inputArray = this.inputValue.split('');
