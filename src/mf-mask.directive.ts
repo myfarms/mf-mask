@@ -84,6 +84,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
 
     private applyMask() {
         if (this.inputValue.length === 0) {
+            setTimeout(() => this.onChange(this.inputValue));
             return;
         }
         const patterns = Object.values(this.config.patterns);
