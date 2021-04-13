@@ -25,9 +25,15 @@
     "url": "https://github.com/myfarms/mf-mask"
   },
   "author": {
-    "name": "Adam Keenan",
-    "email": "adam.keenan@myfarms.com"
+    "name": "MyFarms",
+    "email": "administrator@myfarms.com"
   },
+  "contributors": [
+    {
+      "name": "Adam Keenan",
+      "email": "adam.g.keenan@gmail.com"
+    }
+  ],
   "keywords": [
     "angular"
   ],

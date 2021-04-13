@@ -76,7 +76,7 @@ You can pass in configuration options into the modules `forRoot` method.
     /* In your module */
     MfMaskModule.forRoot({
         patterns: {
-            N: new RegExp(/[a-zA-Z0-9/),
+            N: new RegExp(/[a-zA-Z0-9]/),
         },
         preparedMasks: {
             PHONE: '999 999 9999',
@@ -101,4 +101,4 @@ $ npm run lint
 
 ## License
 
-MIT © [Adam Keenan](mailto:adam.keenan@myfarms.com)
+MIT © [MyFarms](mailto:administrator@myfarms.com)
