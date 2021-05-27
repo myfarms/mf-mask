@@ -24,7 +24,7 @@ import { IConfig, MFMASK_CONFIG } from './config';
 export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     @Input()
     public mfMask: string = '(999) 999-9999';
-    public placeholder = '_';
+    public mfPlaceholder = '_';
 
     private inputValue: string = '';
 
@@ -114,7 +114,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                     maskCursor++;
                     newCursorPos = maskCursor;
                 } else if (i >= inputArray.length) {
-                    newValue += this.placeholder;
+                    newValue += this.mfPlaceholder;
                     maskCursor++;
                 }
             } else if (inputChar === this.mfMask[maskCursor]) {
