@@ -24,6 +24,7 @@ import { IConfig, MFMASK_CONFIG } from './config';
 export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     @Input()
     public mfMask: string = '(999) 999-9999';
+    public mfPlaceholder = '_';
 
     private inputValue: string = '';
 
@@ -99,7 +100,8 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
         inputArray = inputValue.split('');
         let maskCursor = 0;
         let newValue = '';
-        for (let i = 0; i < inputArray.length; i++) {
+        let newCursorPos = 0;
+        for (let i = 0; i < this.mfMask.length; i++) {
             if (maskCursor === this.mfMask.length) {
                 break;
             }
@@ -110,8 +112,10 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 if (patternRegex.test(inputChar)) {
                     newValue += inputChar;
                     maskCursor++;
-                } else {
-                    break;
+                    newCursorPos = maskCursor;
+                } else if (i >= inputArray.length) {
+                    newValue += this.mfPlaceholder;
+                    maskCursor++;
                 }
             } else if (inputChar === this.mfMask[maskCursor]) {
                 newValue += inputChar;
@@ -123,18 +127,12 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
             }
         }
 
-        for (let i = newValue.length - 1; i >= 0; i--) {
-            const val = newValue.charAt(i);
-            const maskPattern = this.mfMask[i];
-            const patternRegex = this.config.patterns[maskPattern];
-            if (patternRegex && patternRegex.test(val)) {
-                break;
-            } else {
-                newValue = newValue.slice(0, newValue.length - 1);
-            }
-        }
+        setTimeout(() => {
+            this.onChange(newValue)
 
-        setTimeout(() => this.onChange(newValue));
+            // Needs to be in setTimeout to work
+            this.elementRef.nativeElement.setSelectionRange(newCursorPos, newCursorPos);
+        });
         this.elementRef.nativeElement.value = newValue;
     }
 }
