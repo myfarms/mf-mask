@@ -6,7 +6,7 @@ import {
     Inject,
     Input,
     OnChanges,
-    SimpleChanges,
+    SimpleChanges
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { IConfig, MFMASK_CONFIG } from './config';
@@ -17,16 +17,16 @@ import { IConfig, MFMASK_CONFIG } from './config';
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => MfMaskDirective),
-            multi: true,
-        },
-    ],
+            multi: true
+        }
+    ]
 })
 export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     @Input()
     public mfMask: string = '(999) 999-9999';
 
-    public onChange = (_: any) => {};
-    public onTouch = () => {};
+    public onChange = (_: any) => { };
+    public onTouch = () => { };
 
     public placeholderChar = '_';
 
@@ -35,7 +35,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     constructor(
         @Inject(MFMASK_CONFIG) private config: IConfig,
         private elementRef: ElementRef
-    ) {}
+    ) { }
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.mfMask) {
@@ -65,31 +65,43 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
         el.setSelectionRange(idx, idx);
     }
 
-    writeValue(inputValue: string): void {
-        if (!inputValue) {
-            inputValue = '';
-            return;
+    public writeValue(inputValue: any): void {
+        if (typeof inputValue !== 'string') {
+            inputValue = inputValue?.toString?.();
+            if (!inputValue) {
+                inputValue = '';
+            }
         }
         this.inputValue = inputValue;
         this.applyMask();
     }
-    registerOnChange(fn: any): void {
+
+    public registerOnChange(fn: any): void {
         this.onChange = fn;
     }
-    registerOnTouched(fn: any): void {
+
+    public registerOnTouched(fn: any): void {
         this.onTouch = fn;
     }
-    setDisabledState?(isDisabled: boolean): void {}
+    
+    public setDisabledState?(isDisabled: boolean): void {
+        this.elementRef.nativeElement.disabled = isDisabled;
+    }
 
     private applyMask() {
+        if (this.inputValue.length === 0) {
+            setTimeout(() => this.onChange(this.inputValue));
+            return;
+        }
         const patterns = Object.values(this.config.patterns);
         let inputValue = '';
         let inputArray = this.inputValue.split('');
         for (let i = 0; i < inputArray.length; i++) {
-            if (patterns.some((pattern) => pattern.test(inputArray[i]))) {
+            if (patterns.some(pattern => pattern.test(inputArray[i]))) {
                 inputValue += inputArray[i];
             }
         }
+
         inputArray = inputValue.split('');
         let maskCursor = 0;
         let newValue = '';
@@ -116,6 +128,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 i--;
             }
         }
+
         for (let i = newValue.length - 1; i >= 0; i--) {
             const val = newValue.charAt(i);
             const maskPattern = this.mfMask[i];
@@ -126,6 +139,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 newValue = newValue.slice(0, newValue.length - 1);
             }
         }
+
         for (let i = newValue.length; i < this.mfMask.length; i++) {
             if (this.mfMask[i] === 'A' || this.mfMask[i] === '9') {
                 newValue = newValue + this.placeholderChar;
@@ -133,9 +147,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 newValue = newValue + this.mfMask[i];
             }
         }
-        setTimeout(() => {
-            this.onChange(newValue);
-        });
+        setTimeout(() => this.onChange(newValue));
 
         this.elementRef.nativeElement.value = newValue;
     }
