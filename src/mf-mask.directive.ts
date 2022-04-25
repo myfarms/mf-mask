@@ -83,7 +83,7 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     public registerOnTouched(fn: any): void {
         this.onTouch = fn;
     }
-    
+
     public setDisabledState?(isDisabled: boolean): void {
         this.elementRef.nativeElement.disabled = isDisabled;
     }
@@ -148,7 +148,6 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
             }
         }
         setTimeout(() => this.onChange(newValue));
-
         this.elementRef.nativeElement.value = newValue;
     }
 }
