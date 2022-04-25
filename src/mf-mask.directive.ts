@@ -25,10 +25,12 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
     @Input()
     public mfMask: string = '(999) 999-9999';
 
-    private inputValue: string = '';
-
     public onChange = (_: any) => { };
     public onTouch = () => { };
+
+    public placeholderChar = '_';
+
+    private inputValue: string = '';
 
     constructor(
         @Inject(MFMASK_CONFIG) private config: IConfig,
@@ -41,6 +43,10 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
                 this.mfMask = this.config.preparedMasks[changes.mfMask.currentValue];
             }
         }
+    }
+
+    public ngOnInit(): void {
+        this.applyMask();
     }
 
     @HostListener('input', ['$event'])
@@ -134,6 +140,13 @@ export class MfMaskDirective implements ControlValueAccessor, OnChanges {
             }
         }
 
+        for (let i = newValue.length; i < this.mfMask.length; i++) {
+            if (this.mfMask[i] === 'A' || this.mfMask[i] === '9') {
+                newValue = newValue + this.placeholderChar;
+            } else {
+                newValue = newValue + this.mfMask[i];
+            }
+        }
         setTimeout(() => this.onChange(newValue));
         this.elementRef.nativeElement.value = newValue;
     }
