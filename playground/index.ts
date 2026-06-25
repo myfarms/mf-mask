@@ -1,12 +1,13 @@
 /**
  * This is only for local test
  */
+import '@angular/compiler';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FormsModule } from '@angular/forms';
 
-import { MfMaskModule }  from '../dist';
+import { MfMaskModule } from '@myfarms/mf-mask';
 
 @Component({
   selector: 'app',

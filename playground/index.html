@@ -8,16 +8,26 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-
+    <!-- zone.js must be a plain script — it patches globals before any modules load -->
     <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('.playground/index.js').catch(function(err){ console.error(err); });
+    <script type="importmap">
+    {
+      "imports": {
+        "@angular/core": "/node_modules/@angular/core/fesm2020/core.mjs",
+        "@angular/common": "/node_modules/@angular/common/fesm2020/common.mjs",
+        "@angular/compiler": "/node_modules/@angular/compiler/fesm2020/compiler.mjs",
+        "@angular/forms": "/node_modules/@angular/forms/fesm2020/forms.mjs",
+        "@angular/platform-browser": "/node_modules/@angular/platform-browser/fesm2020/platform-browser.mjs",
+        "@angular/platform-browser-dynamic": "/node_modules/@angular/platform-browser-dynamic/fesm2020/platform-browser-dynamic.mjs",
+        "rxjs": "/.playground/rxjs.mjs",
+        "rxjs/operators": "/.playground/rxjs.mjs",
+        "@myfarms/mf-mask": "/dist/fesm2020/myfarms-mf-mask.mjs"
+      }
+    }
     </script>
+
+    <script type="module" src=".playground/index.js"></script>
   </head>
 
   <body>

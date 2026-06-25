@@ -27,8 +27,8 @@
   "jsnext:main": "mf-mask.js",
   "typings": "mf-mask.d.ts",
   "peerDependencies": {
-    "@angular/core": "^9.0.0",
-    "rxjs": "^6.0.0",
-    "zone.js": "^0.8.4"
+    "@angular/core": "^13.0.0",
+    "rxjs": "^7.4.0",
+    "zone.js": "~0.11.4"
   }
 }

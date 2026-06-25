@@ -1,14 +1,19 @@
 {
   "compilerOptions": {
     "outDir": "../.playground",
-    "target": "es5",
-    "module": "commonjs",
+    "target": "es2020",
+    "module": "es2020",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [ "es2015", "dom" ],
+    "lib": ["es2020", "dom"],
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@myfarms/mf-mask": ["../src"]
+    }
   }
 }
