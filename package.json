@@ -1,6 +1,6 @@
 {
   "name": "@myfarms/mf-mask",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "scripts": {
     "build": "ng-packagr -p ng-package.json",
     "build:watch": "ng-packagr -p ng-package.json --watch",
